@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+        <title>Agregar tabla</title>
+    </head>
+
+    <body font="Arial" aria-setsize="10">
+
+        <h1>Comandos para agregar tablas</h1>
+        <hr/>
+
+        <p>Para crear una tabla se utiliza el comando <strong>Table</strong>, con el se genera
+        <br/>
+           En conjunto, se utiliza <strong>TR</strong> para crear una <i>fila</i> y el comando
+           <strong>TD</strong> para generar cada <em>columna</em>.
+        <br/>
+        Para que la tabla tengra el respectivo <i>Cuadrado</i>, se debe hacer uso del atributo 
+        <strong>Border="1"</strong>
+        <br/>
+        Ademas, para que la primera fila este en negrita, se puede usar <strong>TH</strong> en vez
+        de <strong>TD</strong>
+        <br/>
+        Tambien, para expandir una columna un numero X de espacios, se puede usar el atributo
+        <strong>colspan="Numero de columnas"</strong>
+        </p>
+        <hr/>
+
+        <table border="1">
+
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Pais</th>
+            </tr>
+
+            <tr>
+                <td>Joyner</td>
+                <td>Garcia</td>
+                <td>25</td>
+                <td>Venezuela</td>                
+            </tr>
+
+            <tr>
+                <td colspan="2">Daniel</td>
+                <td>Duarte</td>
+                <td>25</td>
+                <td>Colombia</td>                
+            </tr>
+
+        </table>
+
+    </body>
+
+</html>
