@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+        <title>Uso Formularios</title>
+    </head>
+
+    <body>
+
+        <h1>Formularios</h1>
+        <hr/>
+        <p>Los formularios es una herramienta que nos sirve para introducir y enviar información <br/>
+           Existen distintas etiquetas que nos permitiran generarlos. Los primero que se debe saber
+           es que un formulario inicia con la etiqueta <strong>form</strong>. <br/>
+           Dentro de dicha etiqueta se pueden usar las siguientes etiquetas: <br/>
+           <ol>
+               <li><strong>input:</strong> La cual sirve para agregar, segun atributo, 
+                lo siguiente:
+                <br/><br/>
+
+                <table border="1">
+                    <tr>
+                        <th>Type</th>
+                        <th>Descripcion</th>
+                    </tr>
+                    <tr>
+                        <td>text</td>
+                        <td>Genera una casilla para una informacion como el nombre<br/>
+                        <em>input type="text"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>radios</td>
+                        <td>Permite utilizar seleccionador de una unica opcion<br/>
+                        <em>input type="radios"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>submit</td>
+                        <td>Es un boton de enviar<br/>
+                        <em>input type="submit"></em>
+                        </td>
+                    </tr>
+                        <td>reset</td>
+                        <td>Es un boton para reestablecer<br/>
+                        <em>input type="reset"></em>
+                        </td>
+                    </tr>
+                    </tr>
+                        <td>email</td>
+                        <td>Para agregar un Email<br/>
+                        <em>input type="email"></em>
+                        </td>
+                    </tr>
+                </table>
+
+                <p>Ademas del atributo <i>Type</i>, existen mas atributos que pueden usarse:</p>
+
+                <table border="1">
+                    <tr>
+                        <th>Atributo</th>
+                        <th>Descripcion</th>
+                    </tr>
+                    <tr>
+                        <td>minlength</td>
+                        <td>Es el mínimo numero de caracteres que se puede ingresar en <i>text</i><br/>
+                        <em>input type="text" minlength="10"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>maxlength</td>
+                        <td>Es el máximo numero de caracteres que se puede ingresar en <i>text<br/>
+                        <em>input type="text" minlength="10"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>placeholder</td>
+                        <td>Cadena que le indica al usuario el tipo de informacion a agregar
+                            Esta estara siempre que este en blanco la casilla <i>text</i><br/>
+                        <em>input type="text" placeholder="ingrese nombre"></em>
+                        </td>
+                    </tr>
+                        <td>size</td>
+                        <td>Es un valor numérico que indica cuántos caracteres de ancho debe tener 
+                            el campo de entrada. El valor por defecto es 20<br/>
+                        <em>input type="text" size="25"></em>
+                        </td>
+                    </tr>
+                    </tr>
+                        <td>pattern</td>
+                        <td>Atributo que sirve para regular que tipo de caracter puede ser ingresado
+                            Se utiliza con JavaScript<br/>
+                        <em>input type="text" pattern="[a-z]{4,8}"></em>
+                        </td>
+                    </tr>
+                </table>
+
+                </li>
+
+                <br/>
+
+                <li>
+                    <strong>textarea:</strong> La cual permite agregar una casilla de descripcion.
+                    Utiliza los siguientes atributos:
+                    <br/><br/>
+                    
+                    <table border="1">
+                        <tr>
+                            <th>Atributo</th>
+                            <th>Descripcion</th>
+                        </tr>
+                        <tr>
+                            <td>rows</td>
+                            <td>Indica la cantidad de filas que tendra por defecto la casilla.<br/>
+                            <em>textarea rows="1">Write something here /textarea></em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>cols</td>
+                            <td>Indica la cantidad de columnas que tendra por defecto la casilla.<br/>
+                            <em>textarea cols="1">Write something here /textarea></em>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+                
+                <br/>
+
+                <li>
+                    <strong>select:</strong> Esta etiqueta permite establecer un seleccionador primero
+                    barra de selección. Se utiliza el siguiente atributo: <br/><br/>
+
+                    <table border="1">
+                        <tr>
+                            <th>Atributo</th>
+                            <th>Descripcion</th>
+                        </tr>
+                        <tr>
+                            <td>option</td>
+                            <td>Indica la(s) opcion(es) que tendra la barra, se usa de esta manera:<br/>
+                                <em>option value="value1" Value 1 /option</em>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+                
+                <br/>
+           
+                <li>
+                    <strong>label:</strong> Esta etiqueta permite establecer titulo a los elementos
+                    o etiquetas en el formulario. <br/><br/>
+
+                    <table border="1">
+                        <tr>
+                            <th>Atributo</th>
+                            <th>Descripcion</th>
+                        </tr>
+                        <tr>
+                            <td>for</td>
+                            <td>En ella se pone el nombre de la etiqueta destino:<br/>
+                                <em>label for="nombre">Nombre /label></em>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+           
+            </ol>
+        </p>
+
+    </body>
+
+
+</html>
