@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <title>Practica</title>
+    </head>
+
+    <body>
+        <font size="3"><h1 align=center><u>Tienda El que ve</u></h1></font>
+        <hr/>
+
+        <p><font size="3" align="justify">
+            Somos una tienda especializada en mejorar la vida de aquellos que
+            requieren o usan lentes en su diario vivir. Para mas información:
+        </p></font>
+
+        <ol>
+            <a href="Lista_productos.html"><strong><li>Ver Productos</li></strong></a>
+            <a href="Ejercicio_Practica.html"><strong><li>Inicio</li></strong></a>
+        </ol>
+        <hr/>
+
+        <h2>Información de contacto</h2>
+        <hr/>
+
+        <form>
+            <label for="Nombre">Nombre: </label>
+            <input type="text" name="Nombre" value="" placeholder="Colocar nombre"
+            minlength="3">
+            <br/><br/>
+            <label for="Apellido">Apellido: </label>
+            <input type="text" name="Apellido" value="" placeholder="Colocar apellido"
+            minlength="3">
+            <br/><br/>
+            <label for="Numero">Telefóno: </label>
+            <input type="number" name="Apellido" value="" placeholder="300 12345678"
+            minlength="11" maxlength="11">
+            <br/><br/>
+            <label for="Nacimiento">Fecha de nacimiento: </label>
+            <input type="date" name="Nacimiento" value="">
+            <br/>
+            <p>Cual es su Sexo:<br/>
+            <label for="Hombre">Hombre: </label>
+            <input type="radio" name="Hombre" value="">
+            <label for="Mujer">Mujer: </label>
+            <input type="radio" name="Mujer" value="">
+            </p>
+            <label for="Email">Email: </label>
+            <input type="email" name="Email" value="" placeholder="Joy@gmail.com"
+            minlength="11">
+            <br/><br/>
+            <label for="seleccion">Padece una enfermedad:</label>
+            <select name=seleccion>
+                <option value="Miopia">Miopia</option>
+                <option value="Presbicia">Presbicia</option>
+                <option value="Astigmatismo">Astigmatismo</option>
+                <option value="Daltonismo">Daltonismo</option>
+            </select>
+            <br/><br/>
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Resetear">
+        </form>
+
+    </body>
+</html>

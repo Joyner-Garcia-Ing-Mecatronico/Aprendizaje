@@ -15,7 +15,7 @@
            es que un formulario inicia con la etiqueta <strong>form</strong>. <br/>
            Dentro de dicha etiqueta se pueden usar las siguientes etiquetas: <br/>
            <ol>
-               <li><strong>input:</strong> La cual sirve para agregar, segun atributo, 
+               <li><strong><u>input:</u></strong> La cual sirve para agregar, segun atributo, 
                 lo siguiente:
                 <br/><br/>
 
@@ -47,9 +47,33 @@
                         <em>input type="reset"></em>
                         </td>
                     </tr>
-                    </tr>
+                    <tr>
                         <td>email</td>
                         <td>Para agregar un Email<br/>
+                        <em>input type="email"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>password</td>
+                        <td>Para agregar una Contraseña<br/>
+                        <em>input type="password"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>number</td>
+                        <td>Para obligar que sea agregado un numero.<br/>
+                        <em>input type="number"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>month</td>
+                        <td>Para agregar un mes del año. Dependiendo del navegador, tendra o no regulacion para desplegar seleccion.<br/>
+                        <em>input type="month"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>password</td>
+                        <td>Para agregar un una semana del mes. Dependiendo del navegador, tendra o no regulacion para desplegar seleccion.<br/>
                         <em>input type="email"></em>
                         </td>
                     </tr>
@@ -101,10 +125,10 @@
                 <br/>
 
                 <li>
-                    <strong>textarea:</strong> La cual permite agregar una casilla de descripcion.
+                    <strong><u>textarea:</u></strong> La cual permite agregar una casilla de descripcion.
                     Utiliza los siguientes atributos:
                     <br/><br/>
-                    
+
                     <table border="1">
                         <tr>
                             <th>Atributo</th>
@@ -124,11 +148,10 @@
                         </tr>
                     </table>
                 </li>
-                
                 <br/>
 
                 <li>
-                    <strong>select:</strong> Esta etiqueta permite establecer un seleccionador primero
+                    <strong><u>select:</u></strong> Esta etiqueta permite establecer un seleccionador primero
                     barra de selección. Se utiliza el siguiente atributo: <br/><br/>
 
                     <table border="1">
@@ -144,11 +167,11 @@
                         </tr>
                     </table>
                 </li>
-                
+
                 <br/>
-           
+
                 <li>
-                    <strong>label:</strong> Esta etiqueta permite establecer titulo a los elementos
+                    <strong><u>label:</u></strong> Esta etiqueta permite establecer titulo a los elementos
                     o etiquetas en el formulario. <br/><br/>
 
                     <table border="1">
@@ -164,8 +187,37 @@
                         </tr>
                     </table>
                 </li>
-           
+
             </ol>
+        </p>
+
+        <p>Añadido a eso, hay 3 controles o atributos especiales que se 
+            recomiendan usar como habito a utilizar formularios.
+            Estos son:
+
+            <ul>
+
+                <li><strong>Name:</strong> Este no se debe repetir, es usado para enviar y rescatar informacion
+                de un servidor. Identifica con un nombre unico el control del formulario. </li>
+                <li><strong>value:</strong> Cada control tiene un valor inicial (Cuando el usuario no ha ingresado informacion),
+                y un valor actual (La información ingresada). El atributo value es ese elemento inicial, que se mostrara 
+                defecto.<br/>
+
+                <strong>Importante:</strong>El atributo Value a diferencia de Placeholder, no se elimina automaticamente, debe ser
+                eliminado directamente por el usuario. Es decir, si se llena un formulario y el usuario no llena ele campo con valor inicial
+                Se enviara automaticamente ese valor inicial.... <u><i>Se recomienda dejar value vacio o con default para que tome la informacion del usuario por defecto.</i></u></li>
+
+                <li><strong>id:</strong> Relaciona el control con una etiqueta.</li>
+
+                <li><strong>required:</strong> Sirve para indicar que control es obligatorio llenar.</li>
+
+                <li><strong>disabled:</strong> Sirve para deshabiliar el uso de un control.</li>
+
+                <li><strong>readonly:</strong> Hace que el control no sea modificable</li>
+                <li><strong>tabindex</strong> Definir el orden de los campos al utilizar tabular.</li>
+                
+            </ul>
+
         </p>
 
     </body>
