@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+        <title>HTML + CSS</title>
+        <meta charset="utf-8">
+        <style> 
+            h2 {
+                color:darkgoldenrod;
+                font-size: 15px;
+                text-shadow: 1px 1px 0px darkgreen;
+                text-decoration: underline;
+            }
+        </style> <!--Segunda forma de usar CSS en el head modificando 
+                     en el head las diferentes etiquetas-->
+        <link rel="stylesheet" type="text/css" href="styles.css"/>
+    </head>
+
+    <body>
+        <h1 style="color:coral; font-size: 20px;";>Mi primera página con HTML + CSS</h1>
+            <!--Esta es la primera forma de usar CSS y la menos recomendada-->
+
+
+        <ul> <!--La # es una almohadilla usada para tener un
+             enlace vacío-->
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Temario</a></li>
+            <li><a href="#">Reseña</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+        <div id="descripcion">
+            <h2>Contenedor</h2>
+            <p>
+            La etiqueta <strong>div</strong>, es muy utilizado con CSS ya que permite hacer
+            agrupaciones de texto o información que puede ser modelada o maquetada.
+            </p>
+            <p>
+                Se utiliza normalmente para crear cajas o contenedores, por los cuales,
+                es posible clasificar la información.
+            </p>
+            <p>Entre los atributos mas usados estan:
+                <ol>
+                    <li>Title</li>
+                    <li>id</li>
+                    <li>lang</li>
+                    <li>class</li>
+                    <li>style</li>
+                    <li>dir</li>
+                    <li>align</li>
+                </ol>
+            </p>
+            <p>
+                Ademas, es posible usar la etiqueta <strong>span</strong>, para modificar
+                partes de una caja.
+            </p>
+        </div>
+
+        <footer>
+            La etiqueta footer es usada para pie de página. &copy; puede ser usada para copywrite.
+        </footer>
+    </body>
+
+</html>
