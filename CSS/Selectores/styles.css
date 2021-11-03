@@ -46,5 +46,81 @@ footer a{/*Esto se llama selectores compuestos, dentro de una etiqueta modificar
     border: 5px dashed red; /*Realizar un borde Punteado*/
 }
 /*Selector de Clase*/
+.parrafo{
+    font-style: italic; /*Cambiar el estilo de la letra*/
+    text-decoration: underline; /*Para colocar una linea por debajo del texto*/
+    font-weight: bold; /*Para colocar en negrita*/
+}
+.parrafo1, .parrafo2{
+    background-color: indianred;
+    color:navy;
+    padding: 8px;
+}
 
-/*Selector de Atributo*/
+.parrafo2{
+    background-color: orange;
+    color: black;
+}
+
+/*Selector de Atributo; es usado principalmente por formularios*/
+/*Selector de atributo, escoger dentro de una entrada un atributo especifico*/
+
+#usuario form /*Aqui se esta usando selector de ID + selector de etiqueta*/
+{
+    color: rgb(98, 98, 114);
+    border: 10px solid blue; 
+    margin-top: 15px; /*Para colocar al texto tantos espacios debajo del anterior*/
+    margin-bottom: 15px; /*Para colocar al texto tantos espacios encima del siguiente parrafo*/
+    padding: 20px;
+}
+
+#usuario form * /*Se esta tomando a todos los elementos del formulario con el selector universal*/
+{
+    display:block; /*Para que los elementos se comporten como texto o como un bloque*/
+                    /*Con block cada elemento tiene una linea para el solo*/
+}
+
+input[type="text"]{ /*Se usa el selector de atributo para el input con tipo texto*/
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 300px;
+}
+input[type="submit"]{ /*Se usa el selector de atributo para el input con tipo texto*/
+    background: green;
+    color: white;
+    padding: 15px;
+    font-size: 15px;
+    text-transform: uppercase;/*Cambiar de mayuscula a minuscula*/
+    border: 1px solid black;
+    cursor: pointer; /*Para que cuando se coloque el raton encima cambie el cursos a una mano señalando*/
+}
+
+/*SELECTOR HIJO: Para aplicar los estilos a la etiqueta que este despues de la que tiene el ID seleccionado
+                 Para este caso, se agrega li > para que solo tome la primera lista y no la sublista*/
+
+#menu > li > a{
+    color: rgb(223, 29, 29);
+    background: none; /*Cambiar color del fondo*/
+    text-decoration: underline; /*Para deshabilitar decoraciones*/
+    font-size: 12px; /*Cambiar tamaño de letra*/
+}
+
+#hijo > p{
+    text-decoration: none;
+    font-weight:normal;
+}
+
+/*PRIORIZACION: CSS le da prioridad a las reglas que esten mas abajo*/
+
+#hijo > #priori{
+    color: blue;
+    font-style: italic;
+    font-weight: lighter;
+    background-color: burlywood;
+}
+
+#priori{
+    color: coral;
+    background-color: rgb(113, 129, 113) !important;
+}
+

@@ -12,15 +12,22 @@
         <h1 id="titulo">Tipos de selectores</h1>
         <hr/>
 
-        <ul>
+        <ul id="menu">
             <li><a href="https://www.w3schools.com/css/" target="_blank">Información</a></li>
+            <li><a href="#">Temario</a>
+                <ul>
+                    <li><a href="#">HTML</a></li>
+                    <li><a href="#">CSS</a></li>
+                    <li><a href="#">JS</a></li>
+                </ul>
+            </li>
             <li><a href="#">Contacto</a></li>
         </ul>
 
         <h2>Que es un selector</h2>
         <br/>
 
-        <p>
+        <p class="parrafo parrafo1"> /*Las clases se pueden usar como los ID para identificar*/
             Dentro de HTML se tienen diferentes elementos o etiquetas, como los h, input, p...  Los cuales,
             pueden contener los siguientes indentificadores:
             
@@ -29,6 +36,8 @@
                 <li>Etiqueta</li>
                 <li>Atributos</li>
                 <li>Clase</li>
+                <li>Hijo</li>
+                <li>Priorizacion - No es un identificador es una regla</li>
             </ul>
             <br/>
         </p>
@@ -38,7 +47,7 @@
         <h2>Selector Universal</h2>
         <br/>
         
-        <p>
+        <p class="parrafo parrafo2">
             Es un selector que permite seleccionar todo el documento HTML.<br/>  
             Este selector es el <strong>*{}</strong>, que simboliza todos los elementos de la página.
             Se usa comunmente para determinar caracteristicas generales como:
@@ -55,7 +64,7 @@
             <h2>Selector de Etiqueta</h2>
             <br/>
             
-            <p>
+            <p class="parrafo">
                 Es un selector que Permite seleccionar los elementos de la pagina con una etiqueta concreta.<br/>  
                 Este selector es el <strong>etiqueta{}</strong>, que simboliza el elemento a modificar.
             </p>
@@ -65,12 +74,75 @@
                 <h2>Selector de ID</h2>
                 <br/>
                 
-                <p>
-                    Es un selector que Permite seleccionar el elemento con ID especifico de la pagina.<br/>  
+                <p class="parrafo">
+                    Es un selector que Permite seleccionar el elemento con ID especifico de la pagina. Por otro lado,
+                    es posible colocar a varios ID a la vez los mismos estilos<br/>  
                     Este selector es el <strong>#ID{}</strong>, que simboliza el elemento a modificar.
                     </ol> 
                 </p>
-                </div>
+            </div>
+
+            <div id="explicacion">
+                <h2>Selector de Clase</h2>
+                <br/>
+                
+                <p class="parrafo">
+                    Es un selector que similar al ID, pero este permite seleccionar multiples elementos, ya que, las etiquetas
+                    pueden tener las mismas clases; ademas, las clases pueden tener varios elementos y a las diferentes clases
+                    se le pueden dar los mismos estilos.<br/>  
+                    Este selector es el <strong>.class{}</strong>, que simboliza el elemento a modificar.
+                    </ol> 
+                </p>
+            </div>
+            <br/>
+
+            <div id="usuario">
+
+                <h2>Selector de atributo</h2>
+                <br/>
+                
+                <p class="parrafo">
+                    Es un selector que es usado normalmente para los formularios.<br/>  
+                    Este selector es el <strong>#ID del DIV form{}</strong>, que simboliza el elemento a modificar.
+                    </ol> 
+                </p>
+
+                <form>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" placeholder="Nombre"/>
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" placeholder="Apellido"/>
+                    <label for="calendario">Fecha nacimiento</label>
+                    <input type="date" name="calendario"/>
+                    <input type="submit" value="enviar">
+                </form>
+            </div>
+
+            <div id="hijo">
+
+                <h2>Selector de hijo</h2>
+                <br/>
+                
+                <p class="parrafo">
+                    Es un selector usado para aplicar estilos a una etiqueta, que este siguiente a
+                    al id seleccionado de otra etiqueta.<br/>  
+                    Este selector es el <strong>#hijo > h2{}</strong>, que simboliza el elemento a modificar.
+                    Si estuviera en una lista, es decir con etiquetas intermedias, seria: <strong>#hijo > li > h2{}</strong>    
+                </ol> 
+                </p>
+
+                <h2>Priorizacion</h2>
+                
+                <p id="priori">La priorizacion funciona de la siguiente manera:
+                    <ol>
+                        <li>CSS le da mas prioridad a las reglas que se encuentren mas abajo</li>
+                        <li>Entre mas especifica es una regla, mas priorizacion tendra, <em>ejemplo</em>
+                        #hijo p{} tiene mas prioridad que p{}</li>
+                        <li>Si a un estilo se le agrega !important; este sera mas prioritario</li>
+                    </ol>
+                </p>
+
+            </div>
         
             <footer>Derechos reservador &copy; <a href="https://www.google.com/?gws_rd=ssl" target="_blank">Google</a></footer>
     </body>
