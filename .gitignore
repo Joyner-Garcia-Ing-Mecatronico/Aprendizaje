@@ -1,5 +1,7 @@
-/Java/Fundamentos/HolaMundoJava/nbproject/private/
-/Java/Fundamentos/HolaMundoJava/build/
+#Ignora lo que se encuentra en la carpeta del curso.
+/Java/Ciclo2Intensivo
+
+#Para ignorar imagenes y comprimidos
 *.jpg
 *.png
 *.zip
