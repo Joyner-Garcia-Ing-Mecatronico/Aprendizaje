@@ -1,0 +1,33 @@
+body{
+    background-color: darkgrey;
+    background-image: url(img/Fondo1.jfif);
+    /*background-repeat: repeat;*/ /*Para que la imagen se repita*/
+    /*background-repeat: repeat-x;*/ /*Para que la imagen se repita solo en eje X*/
+    /*background-repeat: repeat-y;*  /*Para que la imagen se repita solo en eje y*/
+    background-repeat: no-repeat;  /*Para no repetir la imagen*/
+    background-size: 100% 100%; /*Ajustar tamaño del fondo*/ /*Con el doble 100% logramos que se ajuste correctamente*/
+    color: white;
+    background-attachment: fixed; /*Para fijar la imagen*/
+    background-position: left bottom; /*Para posicionar la imagen, si usamos 100% 100% no funciona*/
+}
+
+#caja{
+    border: 5px solid crimson;
+    padding: 8px;
+    background-color: rgb(132, 189, 35);
+    color: rgb(59, 57, 57);
+}
+
+h2, ul{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(109, 19, 19);
+    font-weight: bold;
+    background-color: white;
+    border: 5px solid blue;
+    background-image: url(img/Patron\ 2.jfif); /*Agregar fondo externo*/
+}
+
+#prueba{
+
+}
