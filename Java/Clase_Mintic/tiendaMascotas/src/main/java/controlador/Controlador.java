@@ -40,10 +40,14 @@ public class Controlador {
                     }
                     break;
                 case 3:
-                    //modificar();
+                    System.out.println("\n Modificar Una venta.\n");
+                    modificar();
+                    System.out.println("\n Venta modificada.\n");
                     break;
                 case 4:
-                    //eliminar();
+                    System.out.println("\n Eliminar una venta.\n");
+                    eliminar();
+                    System.out.println("\n Venta eliminada.\n");
                     break;
                 case 5:
                     verVenta();
@@ -114,5 +118,59 @@ public class Controlador {
         return resultado;
     }
     
-
+    public void modificar(){
+        System.out.println("\nPor favor, ingrese la venta que desea modificar: ");
+        int numVenta = input.nextInt();
+        input.nextLine();
+        Venta aModificar = buscar(numVenta);
+        if(aModificar!=null){
+            System.out.println("\nIngrese el nombre del cliente: ");
+            String cliente = input.nextLine();
+            
+            System.out.println("\nIngrese el nombre del producto: ");
+            String producto = input.nextLine();
+            
+            System.out.println("\nIngrese el precio del producto: ");
+            Double precio = input.nextDouble();
+            
+            System.out.println("\nIngrese la cantidad que lleva: ");
+            int cantidad = input.nextInt();
+            input.nextLine();
+            
+            System.out.println("\nIngrese el nombre del responsable de la venta: ");
+            String vendedor = input.nextLine();
+            
+            for(int i=0;i<listaVentas.size();i++){
+                if(listaVentas.get(i).getNumVenta()==aModificar.getNumVenta()){
+                    listaVentas.get(i).setCliente(cliente);
+                    listaVentas.get(i).setPrecio(precio);
+                    listaVentas.get(i).setProducto(producto);
+                    listaVentas.get(i).setCantidad(cantidad);
+                    listaVentas.get(i).setVendendor(vendedor);
+                }
+            }
+        }
+        else{
+            System.out.println("\nEsta venta no esta registrada.");
+        }
+    }
+    
+    public void eliminar(){
+        System.out.println("\nPor favor, ingrese la venta que desea modificar: ");
+        int numVenta = input.nextInt();
+        input.nextLine();
+        Venta aEliminar = buscar(numVenta);
+        if(aEliminar!=null){
+          
+            for(int i=0;i<listaVentas.size();i++){
+                if(listaVentas.get(i).getNumVenta()==aEliminar.getNumVenta()){
+                    listaVentas.remove(i);
+                }
+            }
+        }
+        else{
+            System.out.println("\nEsta venta no esta registrada.");
+        } 
+        
+    }
 }
