@@ -21,23 +21,26 @@ public class Reto2 {
         t1.add(new Boleta("003", "Cars 3", "general", 15000, "98547632", "Mauro"));
         t1.add(new Boleta("004", "Cars 31", "general", 15000, "147896301", "David M"));
         
-        statisticsCinema(t1);
+        int[] resultado = statisticsCinema(t1);
+        
+        System.out.println(resultado[0] + " , "+ resultado[1] +" , "+ resultado[2] + " , "+ resultado[3] +" , "+ resultado[4] +" , "+ resultado[5]);
     }
     
-            
-            
-            
-        
-
-
     public static int[] statisticsCinema(ArrayList <Boleta> funcion){
         //EN ESTE ESPACIO PONER SU LÓGICA
-        int [] resultado = new int[5];
+        int [] resultado = new int[6];
         
         resultado[0] = cantidadBoletas(funcion);
         
         resultado[1] = dineroTotal(funcion);
         
+        resultado[2] = boletasGeneral(funcion);
+        
+        resultado[3] = dineroTotalGeneral(funcion);
+        
+        resultado[4] = boletasVIP(funcion);
+        
+        resultado[5] = dineroTotalVIP(funcion);
         
         return resultado;
     }
@@ -57,7 +60,55 @@ public class Reto2 {
         
         return dinero;
     }
-
     
+    public static int boletasGeneral(ArrayList <Boleta> numBoletas){
+        int general = 0;
+        
+        for(int i=0; i<numBoletas.size(); i++){
+            if("general".equals(numBoletas.get(i).getTipoBoleta())){
+               general = general + 1; 
+            }
+        }
+        
+        return general;
+    }
+
+    public static int dineroTotalGeneral(ArrayList <Boleta> numBoletas){
+        int dineroGeneral = 0;
+        
+        for(int i=0; i<numBoletas.size(); i++){
+            if("general".equals(numBoletas.get(i).getTipoBoleta())){
+                dineroGeneral = dineroGeneral + numBoletas.get(i).getCostoBoleta();
+            }
+            
+        }
+        
+        return dineroGeneral;
+    }
+    
+    public static int boletasVIP(ArrayList <Boleta> numBoletas){
+        int VIP = 0;
+        
+        for(int i=0; i<numBoletas.size(); i++){
+            if("VIP".equals(numBoletas.get(i).getTipoBoleta())){
+               VIP = VIP + 1; 
+            }
+        }
+        
+        return VIP;
+    }
+    
+    public static int dineroTotalVIP(ArrayList <Boleta> numBoletas){
+        int dineroVIP = 0;
+        
+        for(int i=0; i<numBoletas.size(); i++){
+            if("VIP".equals(numBoletas.get(i).getTipoBoleta())){
+                dineroVIP = dineroVIP + numBoletas.get(i).getCostoBoleta();
+            }
+            
+        }
+        
+        return dineroVIP;
+    }
     
 }
