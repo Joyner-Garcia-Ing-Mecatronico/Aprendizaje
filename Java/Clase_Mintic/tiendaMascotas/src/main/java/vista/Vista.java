@@ -13,7 +13,7 @@ public class Vista {
         System.out.println("3. Modificar una venta registrada");
         System.out.println("4. Eliminar una venta registrada");
         System.out.println("5. Ver listado de venta registrada");
-        System.out.println("4. Salir");
+        System.out.println("6. Salir");
         
     }
     

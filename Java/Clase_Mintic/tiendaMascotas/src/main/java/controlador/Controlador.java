@@ -1,9 +1,17 @@
 package controlador;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelos.Venta;
 import static vista.Vista.menuPrincipal;
 import static vista.Vista.verBuscado;
@@ -53,6 +61,7 @@ public class Controlador {
                     verVenta();
                     break;
                 default:
+                    guardarArchivoVentas();
                     System.out.println("Muchas gracias por usar nuestros servicio.");
                     break OUTER;
             }
@@ -172,5 +181,44 @@ public class Controlador {
             System.out.println("\nEsta venta no esta registrada.");
         } 
         
+    }
+    
+    public void guardarArchivoVentas(){
+        try {
+            FileOutputStream archivo = new FileOutputStream("ventas.dat");//Crear el archivo aunque no exista
+            
+            ObjectOutputStream lapiz = new ObjectOutputStream(archivo);
+            
+            lapiz.writeObject(listaVentas);
+            lapiz.close();
+            archivo.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Ruta de Archivo no valida");//Si no se pudiera crear, entonces dara este mensaje, si por X causa pasara
+        } catch (IOException e){
+            System.out.println("No se puede escribir en el archivo");
+            e.printStackTrace();
+        }
+    }
+    
+    public void RecuperarArchivoVentas(){
+        try {
+        FileInputStream archivo = new FileInputStream("ventas.dat");//Crear el archivo aunque no exista
+
+        ObjectInputStream gafas = new ObjectInputStream(archivo);
+        
+        listaVentas = (ArrayList)gafas.readObject();
+        
+        gafas.close();
+        archivo.close();
+        
+        } catch (FileNotFoundException ex) {
+            System.out.println("No se encuentra el archivo, no se puede cargar la información");//Si no se pudiera crear, entonces dara este mensaje, si por X causa pasara
+        } catch (IOException e){
+            System.out.println("No se puede leer en el archivo, no hya memoria previa");
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            System.out.println("La información encontrada no corresponde al archivo de ventas");
+            e.printStackTrace();
+        }
     }
 }
