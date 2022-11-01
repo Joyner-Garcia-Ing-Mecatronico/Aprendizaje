@@ -6,12 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.logging.Level;
@@ -23,33 +19,9 @@ import static vista.Vista.verVenta;
 
 public class Controlador {
 
-    public static ArrayList<Venta> listaVentas;// = new ArrayList<>();
+    public static ArrayList<Venta> listaVentas = new ArrayList<>();
     
     public static Scanner input = new Scanner(System.in);
-    
-    public static final String URL = "jdbc:mysql://localhost:3306/tiendamascotas";
-    
-    public static final String USER = "root";
-    
-    public static final String CLAVE = "";
-
-    public Controlador() {
-        try (Connection coon = DriverManager.getConnection(URL,USER,CLAVE);
-                Statement stmt = coon.createStatement();){
-                    
-                String sql = "CREATE TABLE IF NOT EXISTS ventas(id INT NOT NULL AUTO_INCREMENT,fecha DATE NOT NULL, numVenta INT(5) NOT NULL,"
-                        + "cliente VARCHAR(120) NOT NULL, producto VARCHAR(100) NOT NULL, precio FLOAT NOT NULL,"
-                        + " cantidad INT(10) NOT NULL, vendendor VARCHAR(120) NOT NULL, PRIMARY KEY(id))";
-                stmt.executeUpdate(sql);
-                System.out.println("Conectado a la base de datos, pudimos crear o conectar la base");
-            
-        }catch(SQLException e){
-                System.out.println("No fue posible conectarnos a la base de datos");
-                e.printStackTrace();
-                }
-    }
-    
-    
 
     public void trabajar() {
 
@@ -135,23 +107,11 @@ public class Controlador {
         input.nextLine();
         
         System.out.println("Por favor, ingrese el nombre del vendedor: ");
-        String vendedor = input.nextLine();
+        String Vendedor = input.nextLine();
         
-        Venta nuevaVenta = new Venta(fecha, numVenta, cliente, producto, precio, cantidad, vendedor);
-
-        try (Connection coon = DriverManager.getConnection(URL,USER,CLAVE);
-        Statement stmt = coon.createStatement();){
-
-            String sql = "INSERT INTO ventas (id, fecha, numVenta, cliente, producto, precio, cantidad, vendendor) "
-                    + "VALUES("+nuevaVenta.getId()+",'"+fecha+"',"+numVenta+",'"+cliente+"','"
-                    +producto+"',"+precio+","+cantidad+",'"+vendedor+"');";
-            stmt.executeUpdate(sql);
-            System.out.println("Venta registrada correctamente \n");
-            
-        }catch(SQLException e){
-            System.out.println("No se pudo registrar la venta \n");
-            e.printStackTrace();
-            }
+        Venta nuevaVenta = new Venta(fecha, numVenta, cliente, producto, precio, cantidad, Vendedor);
+        this.listaVentas.add(nuevaVenta);
+        System.out.println("Venta registrada correctamente \n");
         
     }
     
@@ -205,21 +165,21 @@ public class Controlador {
     }
     
     public void eliminar(){
-        System.out.println("\nPor favor, ingrese el ID de la venta que desea eliminar: ");
+        System.out.println("\nPor favor, ingrese la venta que desea modificar: ");
         int numVenta = input.nextInt();
         input.nextLine();
-        //ELIMINAR EN LA BASE DE DATOS
-        try (Connection coon = DriverManager.getConnection(URL,USER,CLAVE);
-        Statement stmt = coon.createStatement();){
-
-            String sql = "DELETE FROM ventas WHERE id="+numVenta+";";
-            stmt.executeUpdate(sql);
-            System.out.println("Venta eliminada correctamente \n");
-            
-        }catch(SQLException e){
-            System.out.println("No se pudo eliminar la venta, no existe\n");
-            e.printStackTrace();
+        Venta aEliminar = buscar(numVenta);
+        if(aEliminar!=null){
+          
+            for(int i=0;i<listaVentas.size();i++){
+                if(listaVentas.get(i).getNumVenta()==aEliminar.getNumVenta()){
+                    listaVentas.remove(i);
+                }
             }
+        }
+        else{
+            System.out.println("\nEsta venta no esta registrada.");
+        } 
         
     }
     
@@ -242,19 +202,19 @@ public class Controlador {
     
     public void RecuperarArchivoVentas(){
         try {
-            FileInputStream archivo = new FileInputStream("ventas.dat");//Crear el archivo aunque no exista
+        FileInputStream archivo = new FileInputStream("ventas.dat");//Crear el archivo aunque no exista
 
-            ObjectInputStream gafas = new ObjectInputStream(archivo);
-
-            listaVentas = (ArrayList)gafas.readObject();
-
-            gafas.close();
-            archivo.close();
+        ObjectInputStream gafas = new ObjectInputStream(archivo);
+        
+        listaVentas = (ArrayList)gafas.readObject();
+        
+        gafas.close();
+        archivo.close();
         
         } catch (FileNotFoundException ex) {
             System.out.println("No se encuentra el archivo, no se puede cargar la información");//Si no se pudiera crear, entonces dara este mensaje, si por X causa pasara
         } catch (IOException e){
-            System.out.println("No se puede leer en el archivo, no hay memoria previa");
+            System.out.println("No se puede leer en el archivo, no hya memoria previa");
             e.printStackTrace();
         }catch (ClassNotFoundException e){
             System.out.println("La información encontrada no corresponde al archivo de ventas");

@@ -1,17 +1,9 @@
 package modelos;
 
 import java.io.Serializable;
-import java.sql.Date;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import org.hibernate.annotations.Entity;
+import java.util.Date;
 
-@Entity
 public class Venta implements Serializable{
-    @Id
-    @GeneratedValue (strategy= GenerationType.IDENTITY)
-    int id;
     Date fecha;
     int numVenta;
     String cliente;
@@ -56,10 +48,6 @@ public class Venta implements Serializable{
 
     public String getVendendor() {
         return vendendor;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setFecha(Date fecha) {
