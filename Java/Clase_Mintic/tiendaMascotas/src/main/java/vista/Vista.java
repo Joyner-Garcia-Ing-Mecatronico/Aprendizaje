@@ -1,5 +1,6 @@
 package vista;
 
+import controlador.Controlador;
 import static controlador.Controlador.listaVentas;
 import modelos.Venta;
 
@@ -13,24 +14,14 @@ public class Vista {
         System.out.println("3. Modificar una venta registrada");
         System.out.println("4. Eliminar una venta registrada");
         System.out.println("5. Ver listado de venta registrada");
-        System.out.println("6. Salir");
+        System.out.println("6. Ver ventas por vendedor");
+        System.out.println("7. Salir");
         
     }
     
     public static void verVenta(){
 
-        for(int i=0;i<listaVentas.size();i++){
-            System.out.println("\n INFORMACION DE LA VENTA: ");
-            System.out.println("\n Fecha de la venta: " +listaVentas.get(i).getFecha());
-            System.out.println("Numero de la venta: " +listaVentas.get(i).getNumVenta());
-            System.out.println("Nombre del cliente: " +listaVentas.get(i).getCliente());
-            System.out.println("Producto vendido: " +listaVentas.get(i).getProducto());
-            System.out.println("Precio de la venta: " +listaVentas.get(i).getPrecio());
-            System.out.println("Cantidad comprada: " +listaVentas.get(i).getCantidad());
-            System.out.println("Nombre del vendedor: " +listaVentas.get(i).getVendendor());
-            System.out.println("Precio total de la venta: " +listaVentas.get(i).getPrecio()*listaVentas.get(i).getCantidad());
-            
-        }
+        Controlador.Directorio();
     }
     
     public static void verBuscado(Venta venta){

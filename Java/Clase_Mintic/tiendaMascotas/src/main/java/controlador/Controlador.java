@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -64,10 +65,10 @@ public class Controlador {
                     break;
                 case 2:
                     System.out.println("\n Buscar Una venta.\n");
-                    System.out.println("\nPor favor, ingrese la venta a buscar: ");
-                    int numVenta = input.nextInt();
+                    System.out.println("\nPor favor, ingrese el id de la venta: ");
+                    int numeroID = input.nextInt();
                     input.nextLine();
-                    Venta buscado = buscar(numVenta);
+                    Venta buscado = buscar(numeroID);
                     if(buscado==null){
                         System.out.println("\nEsta venta no esta registrada.");
                     }
@@ -78,15 +79,16 @@ public class Controlador {
                 case 3:
                     System.out.println("\n Modificar Una venta.\n");
                     modificar();
-                    System.out.println("\n Venta modificada.\n");
                     break;
                 case 4:
                     System.out.println("\n Eliminar una venta.\n");
                     eliminar();
-                    System.out.println("\n Venta eliminada.\n");
                     break;
                 case 5:
                     verVenta();
+                    break;
+                case 6:
+                    getByVendedor();
                     break;
                 default:
                     guardarArchivoVentas();
@@ -155,24 +157,43 @@ public class Controlador {
         
     }
     
-    public static Venta buscar(int numeroVenta){
+    public static Venta buscar(int id){
         Venta resultado = null;//Por defecto, se garantiza el retorno
         
-        for(int i=0; i<listaVentas.size();i++){
-            if(listaVentas.get(i).getNumVenta() == numeroVenta){
-                System.out.println("\n Venta Encontrada \n");
-                resultado = listaVentas.get(i);
+        try (Connection coon = DriverManager.getConnection(URL,USER,CLAVE);
+        Statement stmt = coon.createStatement();){
+
+            String sql = "SELECT * FROM ventas WHERE id="+id+";";
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs.next()==true){
+                Date fecha = rs.getDate("fecha");
+                int numVenta = rs.getInt("numVenta");
+                String cliente = rs.getString("cliente");
+                String producto = rs.getString("producto");
+                Double precio = rs.getDouble("precio");
+                int cantidad = rs.getInt("cantidad");
+                String vendendor = rs.getString("vendendor");
+                
+                resultado = new Venta(fecha, numVenta, cliente, producto, precio, cantidad, vendendor);
             }
-        }
+        }catch(SQLException e){
+            System.out.println("No se pudo conectar y buscar en la base de datos\n");
+            e.printStackTrace();
+            }
+        
         return resultado;
     }
     
     public void modificar(){
-        System.out.println("\nPor favor, ingrese la venta que desea modificar: ");
-        int numVenta = input.nextInt();
+        System.out.println("\nPor favor, ingrese el ID de la venta que desea modificar: ");
+        int numeroID = input.nextInt();
         input.nextLine();
-        Venta aModificar = buscar(numVenta);
+        Venta aModificar = buscar(numeroID);
         if(aModificar!=null){
+            System.out.println("\nIngrese el numero de la venta: ");
+            int numVenta = input.nextInt();
+            input.nextLine();
+            
             System.out.println("\nIngrese el nombre del cliente: ");
             String cliente = input.nextLine();
             
@@ -189,15 +210,19 @@ public class Controlador {
             System.out.println("\nIngrese el nombre del responsable de la venta: ");
             String vendedor = input.nextLine();
             
-            for(int i=0;i<listaVentas.size();i++){
-                if(listaVentas.get(i).getNumVenta()==aModificar.getNumVenta()){
-                    listaVentas.get(i).setCliente(cliente);
-                    listaVentas.get(i).setPrecio(precio);
-                    listaVentas.get(i).setProducto(producto);
-                    listaVentas.get(i).setCantidad(cantidad);
-                    listaVentas.get(i).setVendendor(vendedor);
-                }
-            }
+            try (Connection coon = DriverManager.getConnection(URL, USER, CLAVE);
+                    Statement stmt = coon.createStatement();){
+                        ///Consulta SQL para actualizar un objeto o registro
+                    String sql = "UPDATE ventas SET numVenta="+numVenta+", cliente='"+cliente+"'"
+                            + ", producto='"+producto+"', precio="+precio+", cantidad="+cantidad+","
+                            + " vendendor='"+vendedor+"' WHERE id="+numeroID+";";
+                    stmt.executeUpdate(sql);
+                    System.out.println("Venta actualizada correctamente");
+                    stmt.close();
+                    coon.close();
+            }catch(SQLException e){
+                    System.out.println("La venta no se encuentra en la base de datos");
+                    }
         }
         else{
             System.out.println("\nEsta venta no esta registrada.");
@@ -206,21 +231,97 @@ public class Controlador {
     
     public void eliminar(){
         System.out.println("\nPor favor, ingrese el ID de la venta que desea eliminar: ");
-        int numVenta = input.nextInt();
+        int numeroID = input.nextInt();
         input.nextLine();
-        //ELIMINAR EN LA BASE DE DATOS
-        try (Connection coon = DriverManager.getConnection(URL,USER,CLAVE);
-        Statement stmt = coon.createStatement();){
-
-            String sql = "DELETE FROM ventas WHERE id="+numVenta+";";
-            stmt.executeUpdate(sql);
-            System.out.println("Venta eliminada correctamente \n");
-            
-        }catch(SQLException e){
-            System.out.println("No se pudo eliminar la venta, no existe\n");
-            e.printStackTrace();
+        Venta aEliminar = buscar(numeroID);
+        if(aEliminar!=null){
+            //ELIMINAR EN LA BASE DE DATOS
+            try(Connection coon = DriverManager.getConnection(URL, USER, CLAVE);
+                    Statement stmt = coon.createStatement();){
+                
+                String sql = "DELETE FROM ventas WHERE id="+numeroID+";";
+                
+                stmt.executeUpdate(sql);
+                
+                System.out.println("La venta fue eliminada");
+                
+                stmt.close();
+                coon.close();
+            }catch(SQLException e){
+                System.out.println("Error, no se pudo eliminar la base de datos");
             }
+        }else{
+            System.out.println("La venta no esta registrada");
+        }
+    }
+    
+    public static String Directorio(){
+        String resultado = "";
         
+        try(Connection coon = DriverManager.getConnection(URL, USER, CLAVE);
+                Statement stmt = coon.createStatement();){
+            String sql = "SELECT * FROM ventas";
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while(rs.next()){
+                Date fecha = rs.getDate("fecha");
+                int numVenta = rs.getInt("numVenta");
+                String cliente = rs.getString("cliente");
+                String producto = rs.getString("producto");
+                Double precio = rs.getDouble("precio");
+                int cantidad = rs.getInt("cantidad");
+                String vendendor = rs.getString("vendendor");
+                
+                resultado ="\nINFORMACIÓN DE LA VENTA\nFecha: "+fecha+"\nNumero de Venta: "+numVenta+"\n"
+                        + "Cliente: "+cliente+"\nProducto vendido: "+producto+"\nPrecio del Producto: "+precio+"\n"
+                        + "Cantidad Comprada: "+cantidad+"\nVendedor: "+vendendor+"\n"
+                        + "Total de la Venta: $"+cantidad*precio+"\n";
+                
+                System.out.println(resultado);
+            }
+        }catch(SQLException e){
+            System.out.println("No es posible acceder a la base de datos");
+            e.printStackTrace();
+        }
+        
+        
+        return resultado;
+    }
+    
+    public static String getByVendedor(){
+        String resultado = "";
+        System.out.println("Por favor, digite el nombre del vendedor: ");
+        String nomVendedor = input.nextLine();
+        
+        try(Connection coon = DriverManager.getConnection(URL, USER, CLAVE);
+                Statement stmt = coon.createStatement();){
+            String sql = "SELECT * FROM ventas WHERE vendendor='"+nomVendedor+"';";
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while(rs.next()){
+                Date fecha = rs.getDate("fecha");
+                int numVenta = rs.getInt("numVenta");
+                String cliente = rs.getString("cliente");
+                String producto = rs.getString("producto");
+                Double precio = rs.getDouble("precio");
+                int cantidad = rs.getInt("cantidad");
+                
+                resultado ="\nINFORMACIÓN DE LA VENTA\nFecha: "+fecha+"\nNumero de Venta: "+numVenta+"\n"
+                        + "Cliente: "+cliente+"\nProducto vendido: "+producto+"\nPrecio del Producto: "+precio+"\n"
+                        + "Cantidad Comprada: "+cantidad+"\nVendedor: "+nomVendedor+"\n"
+                        + "Total de la Venta: $"+cantidad*precio+"\n";
+                
+                System.out.println(resultado);
+            }
+        }catch(SQLException e){
+            System.out.println("No es posible acceder a la base de datos");
+            e.printStackTrace();
+        }
+        
+        
+        return resultado;
     }
     
     public void guardarArchivoVentas(){
