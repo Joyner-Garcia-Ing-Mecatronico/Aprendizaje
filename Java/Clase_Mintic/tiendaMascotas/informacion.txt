@@ -1,0 +1,6 @@
+ID, Fecha, No. Venta, Cliente, Producto, Precio, Cantidad, Vendendor, Venta Total
+1,2022-11-11,1,Joyner,Leche,8000.0,3,Mike,24000.0
+2,2022-11-11,2,Nancy,Aguacate,3000.0,5,Steven,15000.0
+3,2022-11-11,3,Ender,Carne,45000.0,3,Mike,135000.0
+4,2022-11-11,4,Nereida,Ropa,80000.0,1,Mike,80000.0
+5,2022-11-11,5,Guillermo,Coca Cola,6000.0,1,Steven,6000.0

@@ -1,8 +1,10 @@
 package controlador;
 
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -90,8 +92,11 @@ public class Controlador {
                 case 6:
                     getByVendedor();
                     break;
+                case 7:
+                    exportarPlano();
+                    break;
                 default:
-                    guardarArchivoVentas();
+                    //guardarArchivoVentas();
                     System.out.println("Muchas gracias por usar nuestros servicio.");
                     break OUTER;
             }
@@ -101,7 +106,7 @@ public class Controlador {
     public static int capturaOpcion() {
         int opcion = 0;
 
-        while (opcion < 1 || opcion > 6) {//Descartamos que el usuario nos de valores incorrectos
+        while (opcion < 1 || opcion > 8) {//Descartamos que el usuario nos de valores incorrectos
             System.out.println("Por favor, ingrese una opción: \n ");
 
             try {//Descarta que el usuario se equivoque en tipo de variable
@@ -324,7 +329,52 @@ public class Controlador {
         return resultado;
     }
     
-    public void guardarArchivoVentas(){
+    public void exportarPlano(){
+        String pathArchivo = ("informacion.txt");
+        
+        try(Connection coon = DriverManager.getConnection(URL, USER, CLAVE);
+                Statement stmt = coon.createStatement();){
+            
+            String sql = "SELECT * FROM ventas";
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            BufferedWriter escritoArchivo = new BufferedWriter(new FileWriter(pathArchivo));
+
+            //Escribo la lineas que contiene los header y delimitadores de columna
+            
+            escritoArchivo.write("ID, Fecha, No. Venta, Cliente, Producto, Precio, Cantidad, Vendendor, Venta Total");//Titulo
+            
+            while(rs.next()){
+                int id = rs.getInt("id");
+                Date fecha = rs.getDate("fecha");
+                int numVenta = rs.getInt("numVenta");
+                String cliente = rs.getString("cliente");
+                String producto = rs.getString("producto");
+                Double precio = rs.getDouble("precio");
+                int cantidad = rs.getInt("cantidad");
+                String vendendor = rs.getString("vendendor");
+                Double ventaTotal = precio*cantidad;
+                
+                //Escribamos en el documento
+                String linea = id+","+fecha+","+numVenta+","+cliente+","+producto+","+precio+","+cantidad+","+vendendor+","+ventaTotal;
+                escritoArchivo.newLine();
+                escritoArchivo.write(linea);
+            }
+            escritoArchivo.close();
+            stmt.close();
+            rs.close();
+            coon.close();
+        }catch(SQLException e){
+            System.out.println("No pudimos contactar con la base de datos");
+            e.printStackTrace();
+        }catch(IOException e){
+            System.out.println("Tuvimos problemas con el archivo externo (Creacion o consulta)");
+            e.printStackTrace();
+        }
+    }
+    
+    /*public void guardarArchivoVentas(){
         try {
             FileOutputStream archivo = new FileOutputStream("ventas.dat");//Crear el archivo aunque no exista
             
@@ -361,5 +411,5 @@ public class Controlador {
             System.out.println("La información encontrada no corresponde al archivo de ventas");
             e.printStackTrace();
         }
-    }
+    }*/
 }

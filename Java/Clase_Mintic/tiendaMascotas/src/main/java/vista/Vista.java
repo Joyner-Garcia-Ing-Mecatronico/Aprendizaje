@@ -15,7 +15,8 @@ public class Vista {
         System.out.println("4. Eliminar una venta registrada");
         System.out.println("5. Ver listado de venta registrada");
         System.out.println("6. Ver ventas por vendedor");
-        System.out.println("7. Salir");
+        System.out.println("7. Exportar información de Ventas en archivo plano");
+        System.out.println("8. Salir");
         
     }
     
