@@ -1,13 +1,8 @@
 package controlador;
 
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -17,14 +12,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelos.Venta;
+import controlador.ControladorVendedor;
 import static vista.Vista.menuPrincipal;
 import static vista.Vista.verBuscado;
 import static vista.Vista.verVenta;
 
-public class Controlador {
+public class ControladorVentas {
 
     public static ArrayList<Venta> listaVentas;// = new ArrayList<>();
     
@@ -35,8 +29,8 @@ public class Controlador {
     public static final String USER = "root";
     
     public static final String CLAVE = "";
-
-    public Controlador() {
+    
+    public ControladorVentas() {
         try (Connection coon = DriverManager.getConnection(URL,USER,CLAVE);
                 Statement stmt = coon.createStatement();){
                     
@@ -93,9 +87,13 @@ public class Controlador {
                     getByVendedor();
                     break;
                 case 7:
-                    exportarPlano();
+                    ControladorVendedor controlVendedor = new ControladorVendedor();
+                    controlVendedor.Vendedores();
                     break;
                 case 8:
+                    exportarPlano();
+                    break;
+                case 9:
                     exportarCSV();
                     break;
                 default:
@@ -108,8 +106,8 @@ public class Controlador {
 
     public static int capturaOpcion() {
         int opcion = 0;
-
-        while (opcion < 1 || opcion > 9) {//Descartamos que el usuario nos de valores incorrectos
+        
+        while (opcion < 1 || opcion > 10) {//Descartamos que el usuario nos de valores incorrectos
             System.out.println("Por favor, ingrese una opción: \n ");
 
             try {//Descarta que el usuario se equivoque en tipo de variable
@@ -423,43 +421,5 @@ public class Controlador {
             e.printStackTrace();
         }
     }
-    
-    /*public void guardarArchivoVentas(){
-        try {
-            FileOutputStream archivo = new FileOutputStream("ventas.dat");//Crear el archivo aunque no exista
-            
-            ObjectOutputStream lapiz = new ObjectOutputStream(archivo);
-            
-            lapiz.writeObject(listaVentas);
-            lapiz.close();
-            archivo.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Ruta de Archivo no valida");//Si no se pudiera crear, entonces dara este mensaje, si por X causa pasara
-        } catch (IOException e){
-            System.out.println("No se puede escribir en el archivo");
-            e.printStackTrace();
-        }
-    }
-    
-    public void RecuperarArchivoVentas(){
-        try {
-            FileInputStream archivo = new FileInputStream("ventas.dat");//Crear el archivo aunque no exista
 
-            ObjectInputStream gafas = new ObjectInputStream(archivo);
-
-            listaVentas = (ArrayList)gafas.readObject();
-
-            gafas.close();
-            archivo.close();
-        
-        } catch (FileNotFoundException ex) {
-            System.out.println("No se encuentra el archivo, no se puede cargar la información");//Si no se pudiera crear, entonces dara este mensaje, si por X causa pasara
-        } catch (IOException e){
-            System.out.println("No se puede leer en el archivo, no hay memoria previa");
-            e.printStackTrace();
-        }catch (ClassNotFoundException e){
-            System.out.println("La información encontrada no corresponde al archivo de ventas");
-            e.printStackTrace();
-        }
-    }*/
 }

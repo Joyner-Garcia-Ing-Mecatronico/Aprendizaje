@@ -24,4 +24,5 @@
         <version>8.0.30</version>
         </dependency>
     </dependencies>
+    <name>tiendaMascotasV2.0_MySQL</name>
 </project>

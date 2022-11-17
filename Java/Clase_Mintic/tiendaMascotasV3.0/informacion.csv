@@ -1,0 +1,4 @@
+ID, Fecha, No. Venta, Cliente, Producto, Precio, Cantidad, Vendendor, Venta Total
+3,2022-11-01,159,Joyner,Leche y Pan,7000.0,1,Mike,7000.0
+4,2022-11-01,125,Luis,Computador Lenovo AC15,1280000.0,1,Mike,1280000.0
+5,2022-11-01,145,Anda lucia,Controles XBOX y Play,250000.0,2,Mike,500000.0
