@@ -14,8 +14,6 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 import modelos.Venta;
 import controlador.ControladorVendedor;
-import static controlador.ControladorVendedor.buscarVendedor;
-import modelos.Vendedor;
 import static vista.Vista.menuPrincipal;
 import static vista.Vista.verBuscado;
 import static vista.Vista.verVenta;
@@ -38,7 +36,7 @@ public class ControladorVentas {
                     
                 String sql = "CREATE TABLE IF NOT EXISTS ventas(id INT NOT NULL AUTO_INCREMENT,fecha DATE NOT NULL, numVenta INT(5) NOT NULL,"
                         + "cliente VARCHAR(120) NOT NULL, producto VARCHAR(100) NOT NULL, precio FLOAT NOT NULL,"
-                        + " cantidad INT(10) NOT NULL, vendedor VARCHAR(120) NOT NULL, PRIMARY KEY(id))";
+                        + " cantidad INT(10) NOT NULL, vendendor VARCHAR(120) NOT NULL, PRIMARY KEY(id))";
                 stmt.executeUpdate(sql);
                 System.out.println("Conectado a la base de datos, pudimos crear o conectar la base");
             
@@ -144,18 +142,17 @@ public class ControladorVentas {
         int cantidad = input.nextInt();
         input.nextLine();
         
-        System.out.println("Por favor, digite la cedula del vendedor: ");
-        String cedula = input.nextLine();
-        Vendedor vendedor = buscarVendedor(cedula);
+        System.out.println("Por favor, ingrese el nombre del vendedor: ");
+        String vendedor = input.nextLine();
         
         Venta nuevaVenta = new Venta(fecha, numVenta, cliente, producto, precio, cantidad, vendedor);
 
         try (Connection coon = DriverManager.getConnection(URL,USER,CLAVE);
         Statement stmt = coon.createStatement();){
 
-            String sql = "INSERT INTO ventas (id, fecha, numVenta, cliente, producto, precio, cantidad, vendedor) "
+            String sql = "INSERT INTO ventas (id, fecha, numVenta, cliente, producto, precio, cantidad, vendendor) "
                     + "VALUES("+nuevaVenta.getId()+",'"+fecha+"',"+numVenta+",'"+cliente+"','"
-                    +producto+"',"+precio+","+cantidad+",'"+vendedor.getCedula()+"');";
+                    +producto+"',"+precio+","+cantidad+",'"+vendedor+"');";
             stmt.executeUpdate(sql);
             System.out.println("Venta registrada correctamente \n");
             
@@ -181,10 +178,9 @@ public class ControladorVentas {
                 String producto = rs.getString("producto");
                 Double precio = rs.getDouble("precio");
                 int cantidad = rs.getInt("cantidad");
-                String cedula = rs.getString("vendedor");
-                Vendedor vendedor = buscarVendedor(cedula);
+                String vendendor = rs.getString("vendendor");
                 
-                resultado = new Venta(fecha, numVenta, cliente, producto, precio, cantidad, vendedor);
+                resultado = new Venta(fecha, numVenta, cliente, producto, precio, cantidad, vendendor);
             }
         }catch(SQLException e){
             System.out.println("No se pudo conectar y buscar en la base de datos\n");
@@ -217,16 +213,15 @@ public class ControladorVentas {
             int cantidad = input.nextInt();
             input.nextLine();
             
-            System.out.println("\nIngrese el No. de cedula del responsable de la venta: ");
-            String cedula = input.nextLine();
-            Vendedor vendedor = buscarVendedor(cedula);
+            System.out.println("\nIngrese el nombre del responsable de la venta: ");
+            String vendedor = input.nextLine();
             
             try (Connection coon = DriverManager.getConnection(URL, USER, CLAVE);
                     Statement stmt = coon.createStatement();){
                         ///Consulta SQL para actualizar un objeto o registro
                     String sql = "UPDATE ventas SET numVenta="+numVenta+", cliente='"+cliente+"'"
                             + ", producto='"+producto+"', precio="+precio+", cantidad="+cantidad+","
-                            + " vendedor='" + vendedor.getCedula() +"' WHERE id="+numeroID+";";
+                            + " vendendor='"+vendedor+"' WHERE id="+numeroID+";";
                     stmt.executeUpdate(sql);
                     System.out.println("Venta actualizada correctamente");
                     stmt.close();
@@ -282,12 +277,11 @@ public class ControladorVentas {
                 String producto = rs.getString("producto");
                 Double precio = rs.getDouble("precio");
                 int cantidad = rs.getInt("cantidad");
-                String cedula = rs.getString("vendedor");
-                Vendedor vendedor = buscarVendedor(cedula);
+                String vendendor = rs.getString("vendendor");
                 
                 resultado ="\nINFORMACIÓN DE LA VENTA\nFecha: "+fecha+"\nNumero de Venta: "+numVenta+"\n"
                         + "Cliente: "+cliente+"\nProducto vendido: "+producto+"\nPrecio del Producto: "+precio+"\n"
-                        + "Cantidad Comprada: "+cantidad+"\nVendedor: "+vendedor.getNombre()+"\n"
+                        + "Cantidad Comprada: "+cantidad+"\nVendedor: "+vendendor+"\n"
                         + "Total de la Venta: $"+cantidad*precio+"\n";
                 
                 System.out.println(resultado);
@@ -360,11 +354,11 @@ public class ControladorVentas {
                 String producto = rs.getString("producto");
                 Double precio = rs.getDouble("precio");
                 int cantidad = rs.getInt("cantidad");
-                String vendedor = rs.getString("vendedor");
+                String vendendor = rs.getString("vendendor");
                 Double ventaTotal = precio*cantidad;
                 
                 //Escribamos en el documento
-                String linea = id+","+fecha+","+numVenta+","+cliente+","+producto+","+precio+","+cantidad+","+vendedor+","+ventaTotal;
+                String linea = id+","+fecha+","+numVenta+","+cliente+","+producto+","+precio+","+cantidad+","+vendendor+","+ventaTotal;
                 escritoArchivo.newLine();
                 escritoArchivo.write(linea);
             }
@@ -406,11 +400,11 @@ public class ControladorVentas {
                 String producto = rs.getString("producto");
                 Double precio = rs.getDouble("precio");
                 int cantidad = rs.getInt("cantidad");
-                String vendedor = rs.getString("vendedor");
+                String vendendor = rs.getString("vendendor");
                 Double ventaTotal = precio*cantidad;
                 
                 //Escribamos en el documento
-                String linea = id+","+fecha+","+numVenta+","+cliente+","+producto+","+precio+","+cantidad+","+vendedor+","+ventaTotal;
+                String linea = id+","+fecha+","+numVenta+","+cliente+","+producto+","+precio+","+cantidad+","+vendendor+","+ventaTotal;
                 escritoArchivo.newLine();
                 escritoArchivo.write(linea);
             }

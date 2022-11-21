@@ -5,15 +5,10 @@ import java.sql.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import org.hibernate.annotations.Entity;
 
 @Entity
-@Table(name="ventas")
 public class Venta implements Serializable{
-    
     @Id
     @GeneratedValue (strategy= GenerationType.IDENTITY)
     int id;
@@ -23,22 +18,16 @@ public class Venta implements Serializable{
     String producto;
     Double precio;
     int cantidad;
-    @ManyToOne
-    @JoinColumn(name="vendedor_cedula")
-    Vendedor vendedor;
+    String vendendor;
 
-    public Venta(Date fecha, int numVenta, String cliente, String producto, Double precio, int cantidad, Vendedor vendedor) {
+    public Venta(Date fecha, int numVenta, String cliente, String producto, Double precio, int cantidad, String vendendor) {
         this.fecha = fecha;
         this.numVenta = numVenta;
         this.cliente = cliente;
         this.producto = producto;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.vendedor = vendedor;
-    }
-
-    public int getId() {
-        return id;
+        this.vendendor = vendendor;
     }
 
     public Date getFecha() {
@@ -65,12 +54,12 @@ public class Venta implements Serializable{
         return cantidad;
     }
 
-    public Vendedor getVendedor() {
-        return vendedor;
+    public String getVendendor() {
+        return vendendor;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public void setFecha(Date fecha) {
@@ -97,15 +86,13 @@ public class Venta implements Serializable{
         this.cantidad = cantidad;
     }
 
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
+    public void setVendendor(String vendendor) {
+        this.vendendor = vendendor;
     }
 
     @Override
     public String toString() {
-        return "Venta{" + "id=" + id + ", fecha=" + fecha + ", numVenta=" + numVenta + ", cliente=" + cliente + ", producto=" + producto + ", precio=" + precio + ", cantidad=" + cantidad + ", vendedor=" + vendedor.getNombre() + '}';
+        return "Venta{" + "fecha=" + fecha + ", numVenta=" + numVenta + ", cliente=" + cliente + ", producto=" + producto + ", precio=" + precio + ", cantidad=" + cantidad + ", vendendor=" + vendendor + '}';
     }
-    
-    
     
 }
